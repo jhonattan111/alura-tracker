@@ -14,7 +14,7 @@
 
     export default defineComponent({
         name: "Temporizador",
-        emits: ['aoTemporizadorFinalizado'],
+        emits: ['aoTemporizadorFinalizado', 'aoCronometroIniciado', 'aoCronometroFinalizado'],
         data() {
             return {    
                 tempoEmSegundos: 0,
