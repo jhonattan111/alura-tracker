@@ -41,7 +41,7 @@ export default defineComponent({
 <style>
     .formulario {
         color: var(--txt-primario);
-        background-color: var(--bg-primeiro);
+        background-color: var(--bg-primario);
     }
 
 </style>

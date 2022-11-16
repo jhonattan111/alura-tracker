@@ -23,9 +23,8 @@
     })
 </script>
 
-<style>
+<style scoped>
     .display {
         color: var(--txt-primario);
-        background-color: var(--bg-primario);
     }
 </style>
