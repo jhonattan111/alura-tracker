@@ -29,7 +29,7 @@ export default defineComponent({
     methods: {
         finalizarTarefa(tempoDecorrido: number) : void {
             this.$emit('aoSalvarTarefa', {
-                duracaoEmSegundos: tempoDecorrido,
+                duracaoEmMilisegundos: tempoDecorrido,
                 descricao: this.descricao
             });
             this.descricao = "";
@@ -41,7 +41,6 @@ export default defineComponent({
 <style>
     .formulario {
         color: var(--txt-primario);
-        background-color: var(--bg-primeiro);
+        background-color: var(--bg-primario);
     }
-
 </style>

@@ -1,12 +1,12 @@
 <template>
   <main class="columns is-gapless is-multiline" :class="{'modo-escuro': modoEscuroAtivo }">
-    <div class="column is-one-quarter">
+    <div class="column is-2">
       <BarraLateral @aoTemaAlterado="trocarTema"/>
     </div>
-    <div class="column is-three-quarter conteudo">
+    <div class="column is-10 conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
-        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"/>
+        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" @ao-apagar-tarefa="apagarTarefa(index)"/>
         <Box v-if="listaEstaVazia">Você não está muito produtivo hoje :(</Box>
       </div>
     </div>
@@ -17,9 +17,9 @@
 import { defineComponent } from 'vue';
 import BarraLateral from './components/BarraLateral.vue';
 import Formulario from './components/Formulario.vue';
+import Box from './components/Box.vue';
 import Tarefa from './components/Tarefa.vue'
 import ITarefa from './interfaces/ITarefa';
-import Box from './components/Box.vue';
 
 export default defineComponent({
   name: 'App',
@@ -43,6 +43,9 @@ export default defineComponent({
     trocarTema(modoEscuroAtivo: boolean) {
       this.modoEscuroAtivo = modoEscuroAtivo;
 
+    },
+    apagarTarefa(indice: number) {
+      this.tarefas.splice(indice, 1);
     }
   },
   computed: {

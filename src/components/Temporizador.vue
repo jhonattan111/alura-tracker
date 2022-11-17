@@ -1,8 +1,12 @@
 <template>
     <div class="is-flex is-align-items-center is-justify-content-space-between">
-        <Cronometro :tempoEmSegundos="tempoEmSegundos"/>
-        <Botao :nomeBotao="botaoPlay.nomeBotao" :iconeBotao="botaoPlay.iconeBotao" :botao-habilitado="!cronometroRodando" @click="iniciar" />
-        <Botao :nomeBotao="botaoPause.nomeBotao" :iconeBotao="botaoPause.iconeBotao" :botao-habilitado="cronometroRodando" @click="finalizar"/>
+        <Cronometro :tempoEmMilisegundos="tempoEmMilisegundos"/>
+        <div v-if="!cronometroRodando">
+            <Botao :nomeBotao="botaoPlay.nomeBotao" :iconeBotao="botaoPlay.iconeBotao" :botao-habilitado="!cronometroRodando" @click="iniciar" />
+        </div>
+        <div v-else>    
+            <Botao :nomeBotao="botaoPause.nomeBotao" :iconeBotao="botaoPause.iconeBotao" :botao-habilitado="cronometroRodando" @click="finalizar"/>
+        </div>
     </div>
 </template>
 
@@ -17,7 +21,7 @@
         emits: ['aoTemporizadorFinalizado', 'aoCronometroIniciado', 'aoCronometroFinalizado'],
         data() {
             return {    
-                tempoEmSegundos: 0,
+                tempoEmMilisegundos: 0,
                 cronometro: 0,
                 cronometroRodando: false,
                 botaoPlay: {
@@ -34,14 +38,14 @@
             iniciar() {
                 this.cronometroRodando = !this.cronometroRodando;
                 this.cronometro = setInterval(() => {
-                    this.tempoEmSegundos += 1;
-                }, 1000);
+                    this.tempoEmMilisegundos += 10;
+                }, 10);
             },
             finalizar() {
                 this.cronometroRodando = !this.cronometroRodando;
                 clearInterval(this.cronometro);
-                this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos);
-                this.tempoEmSegundos = 0;
+                this.$emit('aoTemporizadorFinalizado', this.tempoEmMilisegundos);
+                this.tempoEmMilisegundos = 0;
             }
         },
         components: {
